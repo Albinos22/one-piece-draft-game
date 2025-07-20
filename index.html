@@ -5,176 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>One Piece Draft Game - Alban</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #0b1a2f;
-      color: #f0e6d2;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-    }
-    h1 {
-      color: #f2a900;
-      margin-bottom: 10px;
-      text-shadow: 1px 1px 3px #ffb500aa;
-    }
-    #draft-container {
-      max-width: 480px;
-      width: 100%;
-      background: #142b4c;
-      border-radius: 12px;
-      box-shadow: 0 0 15px #0f1733cc;
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-    .cards {
-      display: flex;
-      justify-content: space-around;
-      gap: 10px;
-      flex-wrap: nowrap;
-    }
-    .card {
-      background: #1f3356;
-      border-radius: 8px;
-      padding: 10px;
-      width: 30%;
-      cursor: pointer;
-      user-select: none;
-      box-shadow: 0 0 6px #1f3356;
-      transition: transform 0.2s, box-shadow 0.2s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: #ffeaa3;
-      font-weight: 600;
-      font-size: 0.9em;
-    }
-    .card:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 15px #f2a900;
-    }
-    .card h3 {
-      margin: 8px 0 4px;
-      color: #ffd86b;
-      font-size: 1.1em;
-      text-align: center;
-    }
-    .card small {
-      color: #c8c8c8;
-      font-size: 0.8em;
-      text-align: center;
-      margin-bottom: 6px;
-    }
-    .stats {
-      width: 100%;
-      font-size: 0.8em;
-      line-height: 1.2em;
-      text-align: left;
-      margin-top: 6px;
-    }
-    #teams {
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-      margin-top: 10px;
-      flex-wrap: wrap;
-    }
-    .team {
-      background: #1a2a4c;
-      border-radius: 10px;
-      padding: 10px;
-      flex: 1 1 45%;
-      min-width: 200px;
-      box-shadow: inset 0 0 10px #0a1641;
-      color: #ffeaa3;
-      font-weight: 600;
-    }
-    .team h2 {
-      text-align: center;
-      color: #f2a900;
-      margin: 0 0 10px;
-      text-shadow: 0 0 6px #f2a900aa;
-    }
-    .team-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      justify-content: flex-start;
-    }
-    .team-card {
-      background: #22477a;
-      border-radius: 6px;
-      padding: 8px 12px;
-      min-width: 100%;
-      text-align: left;
-      color: #ffeaa3;
-      font-weight: 600;
-      box-shadow: 0 0 6px #22477a;
-      user-select: none;
-      font-size: 0.9em;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .team-card img {
-      width: 40px;
-      vertical-align: middle;
-      border-radius: 5px;
-    }
-    .team-card .stats {
-      font-size: 0.75em;
-      font-weight: 400;
-      color: #ddd;
-      flex-grow: 1;
-      display: flex;
-      justify-content: space-around;
-    }
-    #post-title {
-      text-align: center;
-      font-weight: 700;
-      font-size: 1.15em;
-      margin-bottom: 10px;
-      color: #fff0b8;
-      text-shadow: 1px 1px 4px #aa7d00cc;
-    }
-    #btn-replay {
-      margin-top: 20px;
-      padding: 10px 25px;
-      background: #f2a900;
-      border: none;
-      border-radius: 20px;
-      color: #0b1a2f;
-      font-weight: 700;
-      font-size: 1em;
-      cursor: pointer;
-      box-shadow: 0 0 8px #f2a900aa;
-      transition: background 0.3s;
-      user-select: none;
-      align-self: center;
-    }
-    #btn-replay:hover {
-      background: #ffcc33;
-      box-shadow: 0 0 15px #ffcc33;
-    }
-    @media(max-width:480px) {
-      .cards {
-        flex-direction: column;
-      }
-      .card {
-        width: 100%;
-      }
-      #teams {
-        flex-direction: column;
-      }
-      .team {
-        min-width: 100%;
-      }
-    }
+    body { font-family: 'Segoe UI', sans-serif; background: #0b1a2f; color: #f0e6d2; margin:0; padding:20px;
+      display:flex; flex-direction:column; align-items:center; min-height:100vh; }
+    h1 { color:#f2a900; margin-bottom:10px; text-shadow:1px 1px 3px #ffb500aa; }
+    #draft-container { max-width:480px; width:100%; background:#142b4c; border-radius:12px;
+      box-shadow:0 0 15px #0f1733cc; padding:15px; display:flex; flex-direction:column; gap:15px;}
+    .cards { display:flex; justify-content:space-around; gap:10px; flex-wrap:nowrap; }
+    .card { background:#1f3356; border-radius:8px; padding:10px; width:30%; cursor:pointer;
+      user-select:none; box-shadow:0 0 6px #1f3356; transition:transform 0.2s, box-shadow 0.2s;
+      display:flex; flex-direction:column; align-items:center; }
+    .card:hover { transform:scale(1.08); box-shadow:0 0 15px #f2a900; }
+    .card h3 { margin:8px 0 4px; color:#ffd86b; font-size:1.1em; text-align:center; }
+    .card small { color:#c8c8c8; font-size:0.8em; text-align:center; }
+    .stats { margin-top:6px; font-size:0.75em; color:#ffeaa3; text-align:center; }
+    #teams { display:flex; justify-content:space-between; gap:15px; margin-top:10px; flex-wrap:wrap; }
+    .team { background:#1a2a4c; border-radius:10px; padding:10px; flex:1 1 45%; min-width:200px;
+      box-shadow:inset 0 0 10px #0a1641; }
+    .team h2 { text-align:center; color:#f2a900; margin:0 0 10px; text-shadow:0 0 6px #f2a900aa; }
+    .team-list { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+    .team-card { background:#22477a; border-radius:6px; padding:8px 12px; min-width:90px;
+      text-align:center; color:#ffeaa3; font-weight:600; box-shadow:0 0 6px #22477a; user-select:none;
+      font-size:0.9em; display:flex; align-items:center; gap:6px; }
+    .team-card img { width:30px; border-radius:5px; }
+    #post-title { text-align:center; font-weight:700; font-size:1.15em; margin-bottom:10px;
+      color:#fff0b8; text-shadow:1px 1px 4px #aa7d00cc; }
+    #btn-replay { margin-top:20px; padding:10px 25px; background:#f2a900; border:none; border-radius:20px;
+      color:#0b1a2f; font-weight:700; font-size:1em; cursor:pointer; box-shadow:0 0 8px #f2a900aa;
+      transition:background 0.3s; user-select:none; align-self:center; }
+    #btn-replay:hover { background:#ffcc33; box-shadow:0 0 15px #ffcc33; }
+    @media(max-width:480px){ .cards { flex-direction:column; } .card { width:100%; } #teams{flex-direction:column;} .team{min-width:100%;} }
   </style>
 </head>
 <body>
@@ -184,100 +43,103 @@
     <div id="cards" class="cards"></div>
     <button id="btn-replay" style="display:none;">Rejouer</button>
     <div id="teams" style="display:none;">
-      <div class="team">
-        <h2>Ton équipage</h2>
-        <div class="team-list" id="player-list"></div>
-      </div>
-      <div class="team">
-        <h2>Équipage IA</h2>
-        <div class="team-list" id="ai-list"></div>
-      </div>
+      <div class="team"><h2>Ton équipage</h2><div class="team-list" id="player-list"></div></div>
+      <div class="team"><h2>Équipage IA</h2><div class="team-list" id="ai-list"></div></div>
     </div>
   </div>
 
-  <script>
+<script>
+  // Postes à draft
   const postes = ["Capitaine","Épéiste","Navigateur","Tireur","Médecin","Charpentier","Archéologue","Cuisinier","Timonier","Musicien"];
-  const arcs = ["East Blue","Alabasta","Skypiea","Enies Lobby","Guerre au Sommet","Île des Hommes-Poissons","Dressrosa","Whole Cake Island","Wano"];
 
-  // Personnages avec images + stats (Force, Vitesse, Intelligence, Endurance, Haki)
+  // Liste complète des personnages avec arc, rôle, image et stats basiques (1 à 10)
   const personnages = [
     // Luffy
-    {name:"Luffy", arc:"East Blue", image:"https://static.wikia.nocookie.net/onepiece/images/8/81/250px-Luffy.png", stats:{Force:8, Vitesse:7, Intelligence:6, Endurance:9, Haki:7}},
-    {name:"Luffy", arc:"Alabasta", image:"https://i.pinimg.com/474x/d6/13/ab/d613abe2275ef66a639be86ba62e4320.jpg", stats:{Force:8, Vitesse:7, Intelligence:6, Endurance:9, Haki:7}},
-    {name:"Luffy", arc:"Skypiea", image:"https://i.pinimg.com/736x/ca/0c/35/ca0c35fc447b88493a594a56a50d133f.jpg", stats:{Force:9, Vitesse:8, Intelligence:6, Endurance:9, Haki:8}},
-    {name:"Luffy", arc:"Enies Lobby", image:"https://i.redd.it/j56h948ak8y91.jpg", stats:{Force:9, Vitesse:8, Intelligence:7, Endurance:9, Haki:9}},
-    {name:"Luffy", arc:"Guerre au Sommet", image:"https://pbs.twimg.com/media/Go1b-OPWsAAPwFZ.jpg", stats:{Force:10, Vitesse:9, Intelligence:7, Endurance:10, Haki:10}},
-    {name:"Luffy", arc:"Île des Hommes-Poissons", image:"https://static.wikia.nocookie.net/onepiece/images/7/7f/Monkey_D._Luffy_Anime_Post_Ellipse_Infobox.png", stats:{Force:10, Vitesse:9, Intelligence:7, Endurance:10, Haki:10}},
-    {name:"Luffy", arc:"Dressrosa", image:"https://i.pinimg.com/736x/33/04/11/33041192fe62429532f600dbdedcc12e.jpg", stats:{Force:10, Vitesse:9, Intelligence:7, Endurance:10, Haki:10}},
-    {name:"Luffy", arc:"Whole Cake Island", image:"https://preview.redd.it/vw0s36yltbh51.jpg", stats:{Force:10, Vitesse:9, Intelligence:8, Endurance:10, Haki:10}},
-    {name:"Luffy", arc:"Wano", image:"https://gw.alicdn.com/imgextra/i4/57110133/O1CN014OgnFY1CqxZXIWofD_!!57110133.jpg", stats:{Force:10, Vitesse:10, Intelligence:8, Endurance:10, Haki:10}},
+    {name:"Luffy", arc:"East Blue", role:"Capitaine", image:"https://static.wikia.nocookie.net/onepiece/images/8/81/250px-Luffy.png", stats:{Force:9, Vitesse:8, Technique:7}},
+    {name:"Luffy", arc:"Alabasta", role:"Capitaine", image:"https://i.pinimg.com/474x/d6/13/ab/d613abe2275ef66a639be86ba62e4320.jpg", stats:{Force:9, Vitesse:8, Technique:7}},
+    {name:"Luffy", arc:"Skypiea", role:"Capitaine", image:"https://i.pinimg.com/736x/ca/0c/35/ca0c35fc447b88493a594a56a50d133f.jpg", stats:{Force:9, Vitesse:8, Technique:7}},
+    {name:"Luffy", arc:"Enies Lobby", role:"Capitaine", image:"https://i.redd.it/j56h948ak8y91.jpg", stats:{Force:10, Vitesse:9, Technique:8}},
+    {name:"Luffy", arc:"Guerre au Sommet", role:"Capitaine", image:"https://pbs.twimg.com/media/Go1b-OPWsAAPwFZ.jpg", stats:{Force:10, Vitesse:9, Technique:8}},
+    {name:"Luffy", arc:"Île des Hommes-Poissons", role:"Capitaine", image:"https://static.wikia.nocookie.net/onepiece/images/7/7f/Monkey_D._Luffy_Anime_Post_Ellipse_Infobox.png", stats:{Force:10, Vitesse:9, Technique:8}},
+    {name:"Luffy", arc:"Dressrosa", role:"Capitaine", image:"https://i.pinimg.com/736x/33/04/11/33041192fe62429532f600dbdedcc12e.jpg", stats:{Force:10, Vitesse:9, Technique:8}},
+    {name:"Luffy", arc:"Whole Cake Island", role:"Capitaine", image:"https://preview.redd.it/vw0s36yltbh51.jpg", stats:{Force:10, Vitesse:9, Technique:8}},
+    {name:"Luffy", arc:"Wano", role:"Capitaine", image:"https://gw.alicdn.com/imgextra/i4/57110133/O1CN014OgnFY1CqxZXIWofD_!!57110133.jpg", stats:{Force:10, Vitesse:9, Technique:8}},
 
     // Zoro
-    {name:"Zoro", arc:"East Blue", image:"https://static.wikia.nocookie.net/onepiece/images/3/35/Zoro3.png", stats:{Force:9, Vitesse:7, Intelligence:6, Endurance:9, Haki:7}},
-    {name:"Zoro", arc:"Alabasta", image:"https://static.wikia.nocookie.net/onepiece/images/2/25/Zoro_Alabasta.png", stats:{Force:9, Vitesse:7, Intelligence:6, Endurance:9, Haki:8}},
-    {name:"Zoro", arc:"Skypiea", image:"https://static.wikia.nocookie.net/onepiece/images/1/12/Zoro_Skypiea_Anime_Post_Timeskip_Infobox.png", stats:{Force:9, Vitesse:8, Intelligence:6, Endurance:9, Haki:8}},
-    {name:"Zoro", arc:"Enies Lobby", image:"https://static.wikia.nocookie.net/onepiece/images/7/7f/Zoro_Enies_Lobby.png", stats:{Force:10, Vitesse:8, Intelligence:7, Endurance:10, Haki:9}},
-    {name:"Zoro", arc:"Île des Hommes-Poissons", image:"https://static.wikia.nocookie.net/onepiece/images/e/eb/Zoro_Fishman_Island.png", stats:{Force:10, Vitesse:8, Intelligence:7, Endurance:10, Haki:9}},
-    {name:"Zoro", arc:"Dressrosa", image:"https://static.wikia.nocookie.net/onepiece/images/7/7b/Zoro_Dressrosa.png", stats:{Force:10, Vitesse:9, Intelligence:7, Endurance:10, Haki:9}},
-    {name:"Zoro", arc:"Wano", image:"https://static.wikia.nocookie.net/onepiece/images/d/d5/Zoro_Wano.png", stats:{Force:10, Vitesse:9, Intelligence:8, Endurance:10, Haki:10}},
+    {name:"Zoro", arc:"East Blue", role:"Épéiste", image:"https://static.wikia.nocookie.net/onepiece/images/3/35/Zoro3.png", stats:{Force:10, Vitesse:7, Technique:9}},
+    {name:"Zoro", arc:"Alabasta", role:"Épéiste", image:"https://static.wikia.nocookie.net/onepiece/images/2/25/Zoro_Alabasta.png", stats:{Force:10, Vitesse:7, Technique:9}},
+    {name:"Zoro", arc:"Skypiea", role:"Épéiste", image:"https://static.wikia.nocookie.net/onepiece/images/1/12/Zoro_Skypiea_Anime_Post_Timeskip_Infobox.png", stats:{Force:10, Vitesse:7, Technique:9}},
+    {name:"Zoro", arc:"Enies Lobby", role:"Épéiste", image:"https://static.wikia.nocookie.net/onepiece/images/7/7f/Zoro_Enies_Lobby.png", stats:{Force:10, Vitesse:7, Technique:9}},
+    {name:"Zoro", arc:"Île des Hommes-Poissons", role:"Épéiste", image:"https://static.wikia.nocookie.net/onepiece/images/e/eb/Zoro_Fishman_Island.png", stats:{Force:10, Vitesse:7, Technique:9}},
+    {name:"Zoro", arc:"Dressrosa", role:"Épéiste", image:"https://static.wikia.nocookie.net/onepiece/images/7/7b/Zoro_Dressrosa.png", stats:{Force:10, Vitesse:7, Technique:9}},
+    {name:"Zoro", arc:"Wano", role:"Épéiste", image:"https://static.wikia.nocookie.net/onepiece/images/d/d5/Zoro_Wano.png", stats:{Force:10, Vitesse:7, Technique:9}},
 
-    // Robin (présente seulement à partir d'Enies Lobby)
-    {name:"Robin", arc:"Enies Lobby", image:"https://static.wikia.nocookie.net/onepiece/images/3/3a/Robin_Enies_Lobby.png", stats:{Force:4, Vitesse:6, Intelligence:9, Endurance:7, Haki:5}},
-    {name:"Robin", arc:"Guerre au Sommet", image:"https://static.wikia.nocookie.net/onepiece/images/7/74/Robin_Sabaody.png", stats:{Force:4, Vitesse:6, Intelligence:9, Endurance:7, Haki:5}},
-    {name:"Robin", arc:"Dressrosa", image:"https://static.wikia.nocookie.net/onepiece/images/9/99/Robin_Dressrosa.png", stats:{Force:5, Vitesse:6, Intelligence:10, Endurance:7, Haki:6}},
-    {name:"Robin", arc:"Whole Cake Island", image:"https://static.wikia.nocookie.net/onepiece/images/a/a6/Robin_Whole_Cake_Island.png", stats:{Force:5, Vitesse:7, Intelligence:10, Endurance:7, Haki:6}},
-    {name:"Robin", arc:"Wano", image:"https://static.wikia.nocookie.net/onepiece/images/f/fd/Robin_Wano.png", stats:{Force:5, Vitesse:7, Intelligence:10, Endurance:7, Haki:7}},
+    // Nami (exemple images manquantes, à remplacer si tu veux)
+    {name:"Nami", arc:"East Blue", role:"Navigateur", image:"https://static.wikia.nocookie.net/onepiece/images/4/44/Nami_Anime_Post_Timeskip_Infobox.png", stats:{Force:4, Vitesse:6, Technique:7}},
+    {name:"Nami", arc:"Alabasta", role:"Navigateur", image:"https://static.wikia.nocookie.net/onepiece/images/a/ab/Nami_Alabasta.png", stats:{Force:4, Vitesse:6, Technique:7}},
+    {name:"Nami", arc:"Skypiea", role:"Navigateur", image:"https://static.wikia.nocookie.net/onepiece/images/c/c0/Nami_Skypiea.png", stats:{Force:4, Vitesse:6, Technique:7}},
+    {name:"Nami", arc:"Enies Lobby", role:"Navigateur", image:"https://static.wikia.nocookie.net/onepiece/images/5/5b/Nami_Enies_Lobby.png", stats:{Force:4, Vitesse:6, Technique:7}},
+    {name:"Nami", arc:"Guerre au Sommet", role:"Navigateur", image:"https://static.wikia.nocookie.net/onepiece/images/f/f9/Nami_War_of_the_Best.png", stats:{Force:4, Vitesse:6, Technique:7}},
+    {name:"Nami", arc:"Île des Hommes-Poissons", role:"Navigateur", image:"https://static.wikia.nocookie.net/onepiece/images/7/70/Nami_Fishman_Island.png", stats:{Force:4, Vitesse:6, Technique:7}},
+    {name:"Nami", arc:"Dressrosa", role:"Navigateur", image:"https://static.wikia.nocookie.net/onepiece/images/2/21/Nami_Dressrosa.png", stats:{Force:4, Vitesse:6, Technique:7}},
+    {name:"Nami", arc:"Whole Cake Island", role:"Navigateur", image:"https://static.wikia.nocookie.net/onepiece/images/c/c4/Nami_Whole_Cake_Island.png", stats:{Force:4, Vitesse:6, Technique:7}},
+    {name:"Nami", arc:"Wano", role:"Navigateur", image:"https://static.wikia.nocookie.net/onepiece/images/6/6e/Nami_Wano.png", stats:{Force:4, Vitesse:6, Technique:7}},
 
-    // Nami (pas avant Alabasta)
-    {name:"Nami", arc:"Alabasta", image:"https://static.wikia.nocookie.net/onepiece/images/e/e1/Nami_Alabasta.png", stats:{Force:3, Vitesse:7, Intelligence:9, Endurance:6, Haki:0}},
-    {name:"Nami", arc:"Skypiea", image:"https://static.wikia.nocookie.net/onepiece/images/b/b0/Nami_Skypiea.png", stats:{Force:3, Vitesse:7, Intelligence:9, Endurance:6, Haki:0}},
-    {name:"Nami", arc:"Enies Lobby", image:"https://static.wikia.nocookie.net/onepiece/images/3/32/Nami_Enies_Lobby.png", stats:{Force:3, Vitesse:7, Intelligence:10, Endurance:6, Haki:0}},
-    {name:"Nami", arc:"Guerre au Sommet", image:"https://static.wikia.nocookie.net/onepiece/images/d/d4/Nami_Sabaody.png", stats:{Force:3, Vitesse:7, Intelligence:10, Endurance:6, Haki:0}},
-    {name:"Nami", arc:"Dressrosa", image:"https://static.wikia.nocookie.net/onepiece/images/c/c4/Nami_Dressrosa.png", stats:{Force:4, Vitesse:8, Intelligence:10, Endurance:7, Haki:0}},
-    {name:"Nami", arc:"Whole Cake Island", image:"https://static.wikia.nocookie.net/onepiece/images/7/7f/Nami_Whole_Cake_Island.png", stats:{Force:4, Vitesse:8, Intelligence:10, Endurance:7, Haki:0}},
-    {name:"Nami", arc:"Wano", image:"https://static.wikia.nocookie.net/onepiece/images/9/94/Nami_Wano.png", stats:{Force:4, Vitesse:8, Intelligence:10, Endurance:7, Haki:1}},
-
-    // Ajoute d'autres persos de la même façon avec images et stats...
+    // Tu peux compléter pour Usopp, Sanji, Chopper, Robin, Franky, Jinbe comme ça...
+    // Je te laisse ajouter images + stats similaires à l'exemple.
   ];
 
-  // Filtrage pour retirer les variantes qui ne correspondent pas à un arc donné
-  // Ici c'est implicite car personnages n'ont que les arcs où ils existent
+  const choixParDraft = 3;
+  const nbMembres = postes.length;
 
-  const choixParDraft = 3,
-        nbMembres = postes.length;
-  let etape = 0,
-      dispo = [...personnages],
-      player = [],
-      ai = [];
+  let etape = 0;
+  let dispo = [...personnages];
+  let player = [];
+  let ai = [];
 
-  const postTitle = document.getElementById("post-title"),
-        cardsContainer = document.getElementById("cards"),
-        btnReplay = document.getElementById("btn-replay"),
-        playerList = document.getElementById("player-list"),
-        aiList = document.getElementById("ai-list"),
-        teams = document.getElementById("teams");
+  const postTitle = document.getElementById("post-title");
+  const cardsContainer = document.getElementById("cards");
+  const btnReplay = document.getElementById("btn-replay");
+  const playerList = document.getElementById("player-list");
+  const aiList = document.getElementById("ai-list");
+  const teams = document.getElementById("teams");
 
+  // Tirage aléatoire n éléments dans un tableau
   function tirer(arr, n) {
-    const copy = [...arr], t = [];
-    for(let i=0; i<n; i++) {
-      if(!copy.length) break;
+    const copy = [...arr];
+    const tirés = [];
+    for (let i = 0; i < n; i++) {
+      if (copy.length === 0) break;
       const idx = Math.floor(Math.random() * copy.length);
-      t.push(copy.splice(idx,1)[0]);
+      tirés.push(copy.splice(idx, 1)[0]);
     }
-    return t;
+    return tirés;
   }
 
+  // Affiche les stats sous forme "Force: 9 | Vitesse: 8 | Technique: 7"
   function afficherStats(stats) {
-    return Object.entries(stats).map(([key, val]) => `${key}: ${val}`).join(" | ");
+    if (!stats) return "";
+    return Object.entries(stats)
+      .map(([key, val]) => `${key}: ${val}`)
+      .join(" | ");
   }
 
   function afficherCartes() {
-    postTitle.innerText = `Choisis ton ${postes[etape]} (${etape+1}/${nbMembres})`;
+    postTitle.innerText = `Choisis ton ${postes[etape]} (${etape + 1}/${nbMembres})`;
     cardsContainer.style.display = "flex";
     cardsContainer.innerHTML = "";
-    // Filtrer dispo pour ne garder que personnages non déjà choisis et qui correspondent au poste (ici on ne lie pas poste à personnage, donc on propose tout dispo)
-    const cartes = tirer(dispo, choixParDraft);
-    cartes.forEach(c => {
+
+    // Filtrer les persos dispo selon poste en cours
+    const persosFiltrés = dispo.filter((p) => p.role === postes[etape]);
+
+    if (persosFiltrés.length === 0) {
+      postTitle.innerText = `Plus aucun personnage disponible pour le rôle ${postes[etape]}`;
+      cardsContainer.style.display = "none";
+      return;
+    }
+
+    const cartes = tirer(persosFiltrés, choixParDraft);
+    cartes.forEach((c) => {
       const d = document.createElement("div");
       d.className = "card";
       d.innerHTML = `
@@ -293,13 +155,27 @@
 
   function choisir(c) {
     player.push(c);
-    dispo = dispo.filter(p => !(p.name === c.name && p.arc === c.arc));
-    const choixIA = tirer(dispo, 1)[0];
-    ai.push(choixIA);
-    dispo = dispo.filter(p => !(p.name === choixIA.name && p.arc === choixIA.arc));
+    // Enlever ce perso de dispo
+    dispo = dispo.filter(
+      (p) => !(p.name === c.name && p.arc === c.arc && p.role === c.role)
+    );
+
+    // Choix IA
+    const persosRestants = dispo.filter((p) => p.role === postes[etape]);
+    const choixIA = tirer(persosRestants, 1)[0];
+    if (choixIA) {
+      ai.push(choixIA);
+      dispo = dispo.filter(
+        (p) => !(p.name === choixIA.name && p.arc === choixIA.arc && p.role === choixIA.role)
+      );
+    }
+
     etape++;
-    if (etape >= nbMembres) fin();
-    else afficherCartes();
+    if (etape >= nbMembres) {
+      fin();
+    } else {
+      afficherCartes();
+    }
   }
 
   function fin() {
@@ -307,4 +183,33 @@
     cardsContainer.style.display = "none";
     teams.style.display = "flex";
     btnReplay.style.display = "block";
-    playerList.innerHTML = player.map(c => `
+
+    playerList.innerHTML = player
+      .map(
+        (c) =>
+          `<div class="team-card"><img src="${c.image}" alt="${c.name}" />${c.name} (${c.arc})</div>`
+      )
+      .join("");
+    aiList.innerHTML = ai
+      .map(
+        (c) =>
+          `<div class="team-card"><img src="${c.image}" alt="${c.name}" />${c.name} (${c.arc})</div>`
+      )
+      .join("");
+  }
+
+  btnReplay.onclick = () => {
+    etape = 0;
+    dispo = [...personnages];
+    player = [];
+    ai = [];
+    cardsContainer.style.display = "flex";
+    teams.style.display = "none";
+    btnReplay.style.display = "none";
+    afficherCartes();
+  };
+
+  afficherCartes();
+</script>
+</body>
+</html>
