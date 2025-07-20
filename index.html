@@ -2,43 +2,199 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>One Piece - Draft Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>One Piece Draft Game - Alban</title>
   <style>
-    body { font-family: sans-serif; background: #0d1117; color: white; padding: 20px; }
-    h1 { color: #ffcc00; }
-    .character-list, .team { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
-    .character { background: #1e222a; border: 1px solid #30363d; padding: 10px; border-radius: 10px; cursor: pointer; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0b1a2f;
+      color: #f0e6d2;
+      margin: 0; padding: 20px;
+      display: flex; flex-direction: column; align-items: center;
+      min-height: 100vh;
+    }
+    h1 {
+      color: #f2a900;
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 3px #ffb500aa;
+    }
+    #draft-container {
+      max-width: 480px;
+      width: 100%;
+      background: #142b4c;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #0f1733cc;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .cards {
+      display: flex;
+      justify-content: space-around;
+      gap: 10px;
+      flex-wrap: nowrap;
+    }
+    .card {
+      background: #1f3356;
+      border-radius: 8px;
+      padding: 10px;
+      width: 30%;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 0 0 6px #1f3356;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .card:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 15px #f2a900;
+    }
+    .card h3 {
+      margin: 8px 0 4px 0;
+      color: #ffd86b;
+      text-align: center;
+      font-size: 1.1em;
+    }
+    .card small {
+      color: #c8c8c8;
+      font-size: 0.8em;
+      text-align: center;
+    }
+    #teams {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .team {
+      background: #1a2a4c;
+      border-radius: 10px;
+      padding: 10px;
+      flex: 1 1 45%;
+      min-width: 200px;
+      box-shadow: inset 0 0 10px #0a1641;
+    }
+    .team h2 {
+      text-align: center;
+      color: #f2a900;
+      margin-top: 0;
+      margin-bottom: 10px;
+      text-shadow: 0 0 6px #f2a900aa;
+    }
+    .team-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+    .team-card {
+      background: #22477a;
+      border-radius: 6px;
+      padding: 8px 12px;
+      min-width: 90px;
+      text-align: center;
+      color: #ffeaa3;
+      font-weight: 600;
+      box-shadow: 0 0 6px #22477a;
+      user-select: none;
+      font-size: 0.9em;
+    }
+    #post-title {
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.15em;
+      margin-bottom: 10px;
+      color: #fff0b8;
+      text-shadow: 1px 1px 4px #aa7d00cc;
+    }
+    #btn-replay {
+      margin-top: 20px;
+      padding: 10px 25px;
+      background: #f2a900;
+      border: none;
+      border-radius: 20px;
+      color: #0b1a2f;
+      font-weight: 700;
+      font-size: 1em;
+      cursor: pointer;
+      box-shadow: 0 0 8px #f2a900aa;
+      transition: background 0.3s ease;
+      user-select: none;
+      align-self: center;
+    }
+    #btn-replay:hover {
+      background: #ffcc33;
+      box-shadow: 0 0 15px #ffcc33;
+    }
+    @media (max-width: 480px) {
+      .cards {
+        flex-direction: column;
+      }
+      .card {
+        width: 100%;
+      }
+      #teams {
+        flex-direction: column;
+      }
+      .team {
+        min-width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>One Piece : Draft ton équipage</h1>
-  <div id="characters" class="character-list"></div>
-  <h2>Ton équipage :</h2><div id="player-team" class="team"></div>
-  <h2>Équipage IA :</h2><div id="ai-team" class="team"></div>
+  <h1>One Piece Draft - Alban</h1>
+  <div id="draft-container">
+    <div id="post-title"></div>
+    <div id="cards" class="cards"></div>
+    <button id="btn-replay" style="display:none;">Rejouer</button>
+    <div id="teams" style="display:none;">
+      <div class="team" id="player-team">
+        <h2>Ton équipage</h2>
+        <div class="team-list" id="player-list"></div>
+      </div>
+      <div class="team" id="ai-team">
+        <h2>Équipage IA</h2>
+        <div class="team-list" id="ai-list"></div>
+      </div>
+    </div>
+  </div>
+
   <script>
-    const characters = ["Luffy","Zoro","Nami","Usopp","Sanji","Chopper","Robin","Franky","Brook","Jinbe","Ace","Sabo","Mihawk","Doflamingo","Crocodile","Enel","Law","Smoker","Boa Hancock","Magellan"];
-    let available = [...characters], playerTeam = [], aiTeam = [];
-    const dots = el => document.getElementById(el);
-    function render() {
-      dots("characters").innerHTML = available.map(n => `<div class="character" onclick="select('${n}')">${n}</div>`).join("");
-      dots("player-team").innerHTML = playerTeam.map(n => `<div class="character">${n}</div>`).join("");
-      dots("ai-team").innerHTML = aiTeam.map(n => `<div class="character">${n}</div>`).join("");
-    }
-    function select(name) {
-      if (playerTeam.length >= 5) return;
-      playerTeam.push(name);
-      available = available.filter(c=>c!==name);
-      aiPick();
-      render();
-    }
-    function aiPick() {
-      if (aiTeam.length>=5||!available.length) return;
-      const choice=available[Math.floor(Math.random()*available.length)];
-      aiTeam.push(choice);
-      available=available.filter(c=>c!==choice);
-    }
-    window.onload = render;
-  </script>
-</body>
-</html>
+    // Postes d'équipage Mugiwara (10)
+    const postes = [
+      "Capitaine",
+      "Épéiste",
+      "Navigateur",
+      "Tireur",
+      "Médecin",
+      "Charpentier",
+      "Archéologue",
+      "Cuisinier",
+      "Timonier",
+      "Musicien"
+    ];
+
+    // Personnages avec variantes par arcs
+    const personnages = [
+      // Luffy variantes
+      {name:"Luffy", arc:"East Blue"},
+      {name:"Luffy", arc:"Alabasta"},
+      {name:"Luffy", arc:"Skypiea"},
+      {name:"Luffy", arc:"Enies Lobby"},
+      {name:"Luffy", arc:"Guerre au Sommet"},
+      {name:"Luffy", arc:"Île des Hommes-Poissons"},
+      {name:"Luffy", arc:"Dressrosa"},
+      {name:"Luffy", arc:"Whole Cake Island"},
+      {name:"Luffy", arc:"Wano"},
+      // Zoro variantes
+      {name:"Zoro", arc:"East Blue"},
+      {name:"Zoro", arc:"Alabasta"},
+      {name:"Zoro", arc:"Skypiea"},
+      {name:"Zoro", arc:"Enies Lobby"},
+      {name:"Zoro", arc:"Guerre au Sommet"},
+      {name:"Zoro", arc:"Île des Hommes-Poi
