@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>One Piece - Draft Game</title>
+  <style>
+    body { font-family: sans-serif; background: #0d1117; color: white; padding: 20px; }
+    h1 { color: #ffcc00; }
+    .character-list, .team { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+    .character { background: #1e222a; border: 1px solid #30363d; padding: 10px; border-radius: 10px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>One Piece : Draft ton équipage</h1>
+  <div id="characters" class="character-list"></div>
+  <h2>Ton équipage :</h2><div id="player-team" class="team"></div>
+  <h2>Équipage IA :</h2><div id="ai-team" class="team"></div>
+  <script>
+    const characters = ["Luffy","Zoro","Nami","Usopp","Sanji","Chopper","Robin","Franky","Brook","Jinbe","Ace","Sabo","Mihawk","Doflamingo","Crocodile","Enel","Law","Smoker","Boa Hancock","Magellan"];
+    let available = [...characters], playerTeam = [], aiTeam = [];
+    const dots = el => document.getElementById(el);
+    function render() {
+      dots("characters").innerHTML = available.map(n => `<div class="character" onclick="select('${n}')">${n}</div>`).join("");
+      dots("player-team").innerHTML = playerTeam.map(n => `<div class="character">${n}</div>`).join("");
+      dots("ai-team").innerHTML = aiTeam.map(n => `<div class="character">${n}</div>`).join("");
+    }
+    function select(name) {
+      if (playerTeam.length >= 5) return;
+      playerTeam.push(name);
+      available = available.filter(c=>c!==name);
+      aiPick();
+      render();
+    }
+    function aiPick() {
+      if (aiTeam.length>=5||!available.length) return;
+      const choice=available[Math.floor(Math.random()*available.length)];
+      aiTeam.push(choice);
+      available=available.filter(c=>c!==choice);
+    }
+    window.onload = render;
+  </script>
+</body>
+</html>
