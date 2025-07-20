@@ -47,71 +47,192 @@
   </div>
 
   <script>
-    const postes=["Capitaine","Épéiste","Navigateur","Tireur","Médecin","Charpentier","Archéologue","Cuisinier","Timonier","Musicien"];
-    const arcs=["East Blue","Alabasta","Skypiea","Enies Lobby","Guerre au Sommet","Île des Hommes-Poissons","Dressrosa","Whole Cake Island","Wano"];
-    const noms=["Luffy","Zoro","Nami","Usopp","Sanji","Chopper","Robin","Franky","Jinbe"];
-    let personnages=[];
-    noms.forEach(n=>arcs.forEach(a=>personnages.push({name:n,arc:a})));
-    const choixParDraft=3, nbMembres=postes.length;
-    let etape=0, dispo=[...personnages], player=[], ai=[];
+  const postes = ["Capitaine","Épéiste","Navigateur","Tireur","Médecin","Charpentier","Archéologue","Cuisinier","Timonier","Musicien"];
+  const arcs = ["East Blue","Alabasta","Skypiea","Enies Lobby","Guerre au Sommet","Île des Hommes-Poissons","Dressrosa","Whole Cake Island","Wano"];
 
-    const postTitle = document.getElementById("post-title"),
-          cardsContainer = document.getElementById("cards"),
-          btnReplay = document.getElementById("btn-replay"),
-          playerList = document.getElementById("player-list"),
-          aiList = document.getElementById("ai-list"),
-          teams = document.getElementById("teams");
+  // Liste complète personnages avec propriété image à compléter
+  const personnages = [
+    // Luffy
+    {name:"Luffy", arc:"East Blue", image:"https://static.wikia.nocookie.net/p__/images/8/81/250px-Luffy.png
+"},
+    {name:"Luffy", arc:"Alabasta", image:"https://i.pinimg.com/474x/d6/13/ab/d613abe2275ef66a639be86ba62e4320.jpg
+"},
+    {name:"Luffy", arc:"Skypiea", image:"https://i.pinimg.com/736x/ca/0c/35/ca0c35fc447b88493a594a56a50d133f.jpg
+"},
+    {name:"Luffy", arc:"Enies Lobby", https://i.redd.it/j56h948ak8y91.jpg
+"},
+    {name:"Luffy", arc:"Guerre au Sommet", image:"https://pbs.twimg.com/media/Go1b-OPWsAAPwFZ.jpg
+"},
+    {name:"Luffy", arc:"Île des Hommes-Poissons", image:"https://static.wikia.nocookie.net/onepiece/images/7/7f/Monkey_D._Luffy_Anime_Post_Ellipse_Infobox.png
+"},
+    {name:"Luffy", arc:"Dressrosa", image:"https://i.pinimg.com/736x/33/04/11/33041192fe62429532f600dbdedcc12e.jpg
+"},
+    {name:"Luffy", arc:"Whole Cake Island", image:"https://preview.redd.it/vw0s36yltbh51.jpg
+"},
+    {name:"Luffy", arc:"Wano", image:"https://gw.alicdn.com/imgextra/i4/57110133/O1CN014OgnFY1CqxZXIWofD_!!57110133.jpg
+"},
 
-    function tirer(arr,n){
-      const copy=[...arr],t=[];
-      for(let i=0;i<n;i++){ if(!copy.length) break;
-        const idx=Math.floor(Math.random()*copy.length);
-        t.push(copy.splice(idx,1)[0]);
-      }
-      return t;
+    // Zoro
+    {name:"Zoro", arc:"East Blue", image:"https://static.wikia.nocookie.net/p__/images/3/35/Zoro3.png/revision/latest?cb=20140319124641&path-prefix=protagonist
+"},
+    {name:"Zoro", arc:"Alabasta", image:"https://static.wikia.nocookie.net/onepiece/images/2/25/Zoro_Alabasta.png
+"},
+    {name:"Zoro", arc:"Skypiea", image:"https://static.wikia.nocookie.net/onepiece/images/1/12/Zoro_Skypiea_Anime_Post_Timeskip_Infobox.png/revision/latest?cb=202001"},
+    {name:"Zoro", arc:"Enies Lobby", image:"https://static.wikia.nocookie.net/onepiece/images/7/7f/Zoro_Enies_Lobby.png/revision/latest?cb=20120627084555"},
+    {name:"Zoro", arc:"Île des Hommes-Poissons", image:"https://static.wikia.nocookie.net/onepiece/images/e/eb/Zoro_Fishman_Island.png/revision/latest?cb=20160907032524"},
+    {name:"Zoro", arc:"Dressrosa", image:"https://static.wikia.nocookie.net/onepiece/images/7/7b/Zoro_Dressrosa.png/revision/latest?cb=20161004015050"},
+    {name:"Zoro", arc:"Wano", image:"https://static.wikia.nocookie.net/onepiece/images/d/d5/Zoro_Wano.png/revision/latest?cb=20210905083947"},
+
+    // Nami
+    {name:"Nami", arc:"East Blue", image:"image_url_ici"},
+    {name:"Nami", arc:"Alabasta", image:"image_url_ici"},
+    {name:"Nami", arc:"Skypiea", image:"image_url_ici"},
+    {name:"Nami", arc:"Enies Lobby", image:"image_url_ici"},
+    {name:"Nami", arc:"Guerre au Sommet", image:"image_url_ici"},
+    {name:"Nami", arc:"Île des Hommes-Poissons", image:"image_url_ici"},
+    {name:"Nami", arc:"Dressrosa", image:"image_url_ici"},
+    {name:"Nami", arc:"Whole Cake Island", image:"image_url_ici"},
+    {name:"Nami", arc:"Wano", image:"image_url_ici"},
+
+    // Usopp
+    {name:"Usopp", arc:"East Blue", image:"image_url_ici"},
+    {name:"Usopp", arc:"Alabasta", image:"image_url_ici"},
+    {name:"Usopp", arc:"Skypiea", image:"image_url_ici"},
+    {name:"Usopp", arc:"Enies Lobby", image:"image_url_ici"},
+    {name:"Usopp", arc:"Guerre au Sommet", image:"image_url_ici"},
+    {name:"Usopp", arc:"Île des Hommes-Poissons", image:"image_url_ici"},
+    {name:"Usopp", arc:"Dressrosa", image:"image_url_ici"},
+    {name:"Usopp", arc:"Whole Cake Island", image:"image_url_ici"},
+    {name:"Usopp", arc:"Wano", image:"image_url_ici"},
+
+    // Sanji
+    {name:"Sanji", arc:"East Blue", image:"image_url_ici"},
+    {name:"Sanji", arc:"Alabasta", image:"image_url_ici"},
+    {name:"Sanji", arc:"Skypiea", image:"image_url_ici"},
+    {name:"Sanji", arc:"Enies Lobby", image:"image_url_ici"},
+    {name:"Sanji", arc:"Guerre au Sommet", image:"image_url_ici"},
+    {name:"Sanji", arc:"Île des Hommes-Poissons", image:"image_url_ici"},
+    {name:"Sanji", arc:"Dressrosa", image:"image_url_ici"},
+    {name:"Sanji", arc:"Whole Cake Island", image:"image_url_ici"},
+    {name:"Sanji", arc:"Wano", image:"image_url_ici"},
+
+    // Chopper
+    {name:"Chopper", arc:"East Blue", image:"image_url_ici"},
+    {name:"Chopper", arc:"Alabasta", image:"image_url_ici"},
+    {name:"Chopper", arc:"Skypiea", image:"image_url_ici"},
+    {name:"Chopper", arc:"Enies Lobby", image:"image_url_ici"},
+    {name:"Chopper", arc:"Guerre au Sommet", image:"image_url_ici"},
+    {name:"Chopper", arc:"Île des Hommes-Poissons", image:"image_url_ici"},
+    {name:"Chopper", arc:"Dressrosa", image:"image_url_ici"},
+    {name:"Chopper", arc:"Whole Cake Island", image:"image_url_ici"},
+    {name:"Chopper", arc:"Wano", image:"image_url_ici"},
+
+    // Robin
+    {name:"Robin", arc:"East Blue", image:"image_url_ici"},
+    {name:"Robin", arc:"Alabasta", image:"image_url_ici"},
+    {name:"Robin", arc:"Skypiea", image:"image_url_ici"},
+    {name:"Robin", arc:"Enies Lobby", image:"image_url_ici"},
+    {name:"Robin", arc:"Guerre au Sommet", image:"image_url_ici"},
+    {name:"Robin", arc:"Île des Hommes-Poissons", image:"image_url_ici"},
+    {name:"Robin", arc:"Dressrosa", image:"image_url_ici"},
+    {name:"Robin", arc:"Whole Cake Island", image:"image_url_ici"},
+    {name:"Robin", arc:"Wano", image:"image_url_ici"},
+
+    // Franky
+    {name:"Franky", arc:"East Blue", image:"image_url_ici"},
+    {name:"Franky", arc:"Alabasta", image:"image_url_ici"},
+    {name:"Franky", arc:"Skypiea", image:"image_url_ici"},
+    {name:"Franky", arc:"Enies Lobby", image:"image_url_ici"},
+    {name:"Franky", arc:"Guerre au Sommet", image:"image_url_ici"},
+    {name:"Franky", arc:"Île des Hommes-Poissons", image:"image_url_ici"},
+    {name:"Franky", arc:"Dressrosa", image:"image_url_ici"},
+    {name:"Franky", arc:"Whole Cake Island", image:"image_url_ici"},
+    {name:"Franky", arc:"Wano", image:"image_url_ici"},
+
+    // Jinbe
+    {name:"Jinbe", arc:"East Blue", image:"image_url_ici"},
+    {name:"Jinbe", arc:"Alabasta", image:"image_url_ici"},
+    {name:"Jinbe", arc:"Skypiea", image:"image_url_ici"},
+    {name:"Jinbe", arc:"Enies Lobby", image:"image_url_ici"},
+    {name:"Jinbe", arc:"Guerre au Sommet", image:"image_url_ici"},
+    {name:"Jinbe", arc:"Île des Hommes-Poissons", image:"image_url_ici"},
+    {name:"Jinbe", arc:"Dressrosa", image:"image_url_ici"},
+    {name:"Jinbe", arc:"Whole Cake Island", image:"image_url_ici"},
+    {name:"Jinbe", arc:"Wano", image:"image_url_ici"},
+  ];
+
+  const choixParDraft = 3,
+        nbMembres = postes.length;
+  let etape = 0,
+      dispo = [...personnages],
+      player = [],
+      ai = [];
+
+  const postTitle = document.getElementById("post-title"),
+        cardsContainer = document.getElementById("cards"),
+        btnReplay = document.getElementById("btn-replay"),
+        playerList = document.getElementById("player-list"),
+        aiList = document.getElementById("ai-list"),
+        teams = document.getElementById("teams");
+
+  function tirer(arr, n) {
+    const copy = [...arr], t = [];
+    for(let i=0; i<n; i++) {
+      if(!copy.length) break;
+      const idx = Math.floor(Math.random() * copy.length);
+      t.push(copy.splice(idx,1)[0]);
     }
+    return t;
+  }
 
-    function afficherCartes(){
-      postTitle.innerText=`Choisis ton ${postes[etape]} (${etape+1}/${nbMembres})`;
-      cardsContainer.innerHTML="";
-      const cartes=tirer(dispo,choixParDraft);
-      cartes.forEach(c=>{
-        const d=document.createElement("div");
-        d.className="card";
-        d.innerHTML=`<h3>${c.name}</h3><small>${c.arc}</small>`;
-        d.onclick=()=>choisir(c);
-        cardsContainer.appendChild(d);
-      });
-    }
+  function afficherCartes() {
+    postTitle.innerText = `Choisis ton ${postes[etape]} (${etape+1}/${nbMembres})`;
+    cardsContainer.style.display = "flex";
+    cardsContainer.innerHTML = "";
+    const cartes = tirer(dispo, choixParDraft);
+    cartes.forEach(c => {
+      const d = document.createElement("div");
+      d.className = "card";
+      d.innerHTML = `
+        <img src="${c.image}" alt="${c.name} ${c.arc}" style="width:80%; border-radius:8px; margin-bottom:8px;" />
+        <h3>${c.name}</h3>
+        <small>${c.arc}</small>
+      `;
+      d.onclick = () => choisir(c);
+      cardsContainer.appendChild(d);
+    });
+  }
 
-    function choisir(c){
-      player.push(c);
-      dispo=dispo.filter(p=>!(p.name===c.name && p.arc===c.arc));
-      const choixIA=tirer(dispo,1)[0];
-      ai.push(choixIA);
-      dispo=dispo.filter(p=>!(p.name===choixIA.name && p.arc===choixIA.arc));
-      etape++;
-      if(etape>=nbMembres) fin(); else afficherCartes();
-    }
+  function choisir(c) {
+    player.push(c);
+    dispo = dispo.filter(p => !(p.name === c.name && p.arc === c.arc));
+    const choixIA = tirer(dispo, 1)[0];
+    ai.push(choixIA);
+    dispo = dispo.filter(p => !(p.name === choixIA.name && p.arc === choixIA.arc));
+    etape++;
+    if (etape >= nbMembres) fin();
+    else afficherCartes();
+  }
 
-    function fin(){
-      postTitle.innerText="Draft terminée !";
-      cardsContainer.style.display="none";
-      teams.style.display="flex";
-      btnReplay.style.display="block";
-      playerList.innerHTML=player.map(c=>`<div class="team-card">${c.name} (${c.arc})</div>`).join("");
-      aiList.innerHTML=ai.map(c=>`<div class="team-card">${c.name} (${c.arc})</div>`).join("");
-    }
+  function fin() {
+    postTitle.innerText = "Draft terminée !";
+    cardsContainer.style.display = "none";
+    teams.style.display = "flex";
+    btnReplay.style.display = "block";
+    playerList.innerHTML = player.map(c => `<div class="team-card"><img src="${c.image}" alt="${c.name}" style="width:40px; vertical-align:middle; border-radius:5px; margin-right:6px;" />${c.name} (${c.arc})</div>`).join("");
+    aiList.innerHTML = ai.map(c => `<div class="team-card"><img src="${c.image}" alt="${c.name}" style="width:40px; vertical-align:middle; border-radius:5px; margin-right:6px;" />${c.name} (${c.arc})</div>`).join("");
+  }
 
-    btnReplay.onclick=()=>{
-      etape=0; dispo=[...personnages]; player=[]; ai=[];
-      cardsContainer.style.display="flex";
-      teams.style.display="none";
-      btnReplay.style.display="none";
-      afficherCartes();
-    };
-
+  btnReplay.onclick = () => {
+    etape = 0;
+    dispo = [...personnages];
+    player = [];
+    ai = [];
+    cardsContainer.style.display = "flex";
+    teams.style.display = "none";
+    btnReplay.style.display = "none";
     afficherCartes();
-  </script>
-</body>
-</html>
+  };
+
+  afficherCartes();
+</script>
